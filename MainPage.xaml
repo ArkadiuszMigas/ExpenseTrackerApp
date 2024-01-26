@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ExpenseTrackerApp.MainPage"
+             >
+
+    <StackLayout>
+        <!-- Header -->
+        <Grid BackgroundColor="{DynamicResource PrimaryColor}" Padding="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="270"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Text="Click to refresh or add: " FontSize="20" TextColor="Black" VerticalOptions="CenterAndExpand"/>
+            <Button Grid.Column="1" Text="R" BackgroundColor="#00D1FF" VerticalOptions="CenterAndExpand" HorizontalOptions="End" Clicked="Button_Refresh" Margin="5"/>
+            <Button Grid.Column="2" Text="+" FontSize="18" TextColor="White" VerticalOptions="CenterAndExpand" HorizontalOptions="End" Clicked="OnAddExpenseClicked" Margin="5"/>
+            
+        </Grid>
+        
+
+        <!-- Body -->
+        <StackLayout Margin="10">
+            <!-- Chart -->
+            <Frame BorderColor="Black" CornerRadius="10" BackgroundColor="White" HeightRequest="160">
+
+                <Grid x:Name="gridView">
+                    <Grid.ColumnDefinitions>
+                        <!-- Dodaj kolumny dla etykiet i wartości -->
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="40" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="40" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="40" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Etykiety -->
+                    <!-- Bar 1 -->
+                    <BoxView x:Name="BarFood" Grid.Row="0" Grid.Column="0" Color="#00D1FF" HeightRequest="50" WidthRequest="50" VerticalOptions="End"/>
+                        <!-- Bar 2 -->
+                    <BoxView x:Name="BarHome" Grid.Row="0" Grid.Column="2" Color="#00D1FF" HeightRequest="80" WidthRequest="50" VerticalOptions="End"/>
+                        <!-- Bar 3 -->
+                    <BoxView x:Name="BarTravel" Grid.Row="0" Grid.Column="4" Color="#00D1FF" HeightRequest="120" WidthRequest="50" VerticalOptions="End"/>
+                        <!-- Bar 4 -->
+                    <BoxView x:Name="BarParty" Grid.Row="0" Grid.Column="6" Color="#00D1FF" HeightRequest="40" WidthRequest="50" VerticalOptions="End"/>
+
+                    <Label Grid.Row="1" Grid.Column="0" Text="FOOD" VerticalOptions="End" HorizontalOptions="Center"/>
+                    <Label Grid.Row="1" Grid.Column="2" Text="HOME" VerticalOptions="End" HorizontalOptions="Center"/>
+                    <Label Grid.Row="1" Grid.Column="4" Text="TRAVEL" VerticalOptions="End" HorizontalOptions="Center"/>
+                    <Label Grid.Row="1" Grid.Column="6" Text="PARTY" VerticalOptions="End" HorizontalOptions="Center"/>
+                </Grid>
+            </Frame>
+            
+            <!--Expense List-->
+            <ListView 
+                x:Name="expListView"
+                BackgroundColor="Transparent"
+                SeparatorColor="Aqua"
+                RowHeight="80"
+                ItemSelected="OnItemSelected"
+                >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell >
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"/>
+                                    <!--0-->
+                                    <ColumnDefinition Width="60"/>
+                                    <!--1-->
+                                    <ColumnDefinition Width="50"/>
+                                    <!--2-->
+                                    <ColumnDefinition Width="90"/>
+                                    <!--3-->
+                                    <ColumnDefinition Width="40"/>
+                                    <!--4-->
+                                    <ColumnDefinition Width="50"/>
+                                    <!--5-->
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding ExpenseName}" FontAttributes="Bold"/>
+                                <Label Grid.Row="2" Text="Cena: "/>
+                                <Label Grid.Row="2" Grid.Column="1" Text="{Binding Price}" HorizontalOptions="Start"/>
+                                <Label Grid.Row="2" Grid.Column="2" Text="Data: "/>
+                                <Label Grid.Row="2" Grid.Column="3" Text="{Binding Date}" HorizontalOptions="Center"/>
+                                <Label Grid.Row="2" Grid.Column="4" Text="Kat: "/>
+                                <Label Grid.Row="3" Grid.Column="5"  Text="{Binding Category}" HorizontalOptions="Center"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+        
+    </StackLayout>
+    
+</ContentPage>
